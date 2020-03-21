@@ -33,23 +33,33 @@ public class Interpreter {
                 results.add(structureResult);
                 System.out.println("ITS A TRUCTUUUUREEE YEAHH BOII");
 
-            // Setq calculations
-            } else if (lineToCalculate.get(1).equals("setq")) {
+            // Setq and defun calculations
+            } else if (lineToCalculate.get(1).equals("setq") || lineToCalculate.get(1).equals("defun")) {
                 LispMemory memorySet = new LispMemory();
-                String result = memorySet.setq(lineToCalculate);
+                String result = "NO RESULT";
+                if(lineToCalculate.get(1).equals("setq")) {
+                    result = memorySet.setq(lineToCalculate);
+                } else {
+                    result = memorySet.defun(lineToCalculate);
+                }
                 results.add(result);
                 System.out.println("The result is " + result);
                 System.out.println(LispMemory.variableMemory);
                 System.out.println("ITS A SETQ GUYSSSS");
 
             // Defun calculations
-            } else if(lineToCalculate.get(1).equals("defun")) {
+            }
 
+            // If its a function
+            else {
+                lineToCalculate.remove(lineToCalculate.size() - 1);
+                lineToCalculate.remove(0);
+                String result = LispMemory.runFunction(lineToCalculate) + "";
+                results.add(result);
             }
 
             for(int j = 0; j < lineToCalculate.size(); j++) {
                 String currentWord =  lineToCalculate.get(j);
-
             }
         }
         System.out.println(results);
@@ -64,6 +74,7 @@ public class Interpreter {
         }
         return false;
     }
+
 
     private boolean isArithmetic(ArrayList<String> line) {
         LispMemory functions = new LispMemory();

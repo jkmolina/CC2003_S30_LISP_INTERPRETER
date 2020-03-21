@@ -14,7 +14,7 @@ public class Arithmetic {
         }
 
         int index = 0;
-        while(line.size() > 1 && index <90) {
+        while(line.size() > 1) {
             int openParentheses = 0;
             int closedParentheses = 0;
 
@@ -59,7 +59,12 @@ public class Arithmetic {
 
                 result = Double.parseDouble(line.get(open + 2));
                 for(int i = open + 3; i < closed - 1; i ++) {
-                    double number = Double.parseDouble(line.get(i));
+                    double number;
+                    try {
+                        number = Double.parseDouble(line.get(i));
+                    } catch (Exception E) {
+                        number = Double.parseDouble(LispMemory.variableMemory.get(line.get(i)).get(1));
+                    }
                     result -= number;
                 }
                 break;
@@ -68,7 +73,12 @@ public class Arithmetic {
                 System.out.println("IN MULT");
                 result = 1;
                 for(int i = open + 2; i < closed - 1; i ++) {
-                    double number = Double.parseDouble(line.get(i));
+                    double number;
+                    try {
+                        number = Double.parseDouble(line.get(i));
+                    } catch (Exception E) {
+                        number = Double.parseDouble(LispMemory.variableMemory.get(line.get(i)).get(1));
+                    }
                     result *= number;
                 }
                 break;
@@ -76,7 +86,12 @@ public class Arithmetic {
             case "/":
                 result = Double.parseDouble(line.get(open + 2));
                 for(int i = open + 3; i < closed - 1; i ++) {
-                    double number = Double.parseDouble(line.get(i));
+                    double number;
+                    try {
+                        number = Double.parseDouble(line.get(i));
+                    } catch (Exception E) {
+                        number = Double.parseDouble(LispMemory.variableMemory.get(line.get(i)).get(1));
+                    }
                     result /= number;
                 }
                 break;

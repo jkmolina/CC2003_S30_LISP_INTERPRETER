@@ -67,8 +67,8 @@
 
 ;Recursividad
 (defun fact (n)
-(cond((equal n 1) 1)
-	((* n (fact (- n 1)))))
+(cond((equal n 1) 1) ((* n (fact (- n 1)))))
 )
-(print (fact 5))
+
+(fact 5)
 ;120
