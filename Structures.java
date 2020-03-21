@@ -1,7 +1,19 @@
 import java.util.ArrayList;
-
+/**
+ * <h1>Structures</h1>
+ * Class that operates lists, quote, and cond
+ * <p>
+ *
+ * @author Joonho Kim (jkmolina) Alejandro Alvarez (Alejandroav93) Pablo Ruiz (PingMaster99)
+ * @version 1.0
+ * @since 2020-03-20
+ **/
 public class Structures {
-
+    /**
+     * Gets the structure type: list, quote, or cond according to the input line
+     * @param line the line that is going to be analyzed
+     * @return String with the result of the operation
+     */
     public String operateStructure(ArrayList<String> line) {
         String result = "";
         String operatorType = line.get(1);
@@ -25,11 +37,15 @@ public class Structures {
         return result;
     }
 
+    /**
+     * Analyzes cond
+     * @param line the line that is going to be analyzed
+     * @return String with the result of the operation (true or false)
+     */
     private ArrayList<String> conditional(ArrayList<String> line) {
         ArrayList<String> result = new ArrayList<>();
 
         int endOfConditional = 0;
-        //(cond((equal n 1) 3) (2))
         ArrayList<String> clonedLine = new ArrayList<>(line);   // Avoids messing up the original line
         ArrayList<String>  conditionalFragment = new ArrayList<>();
         for(int i = 3; i < line.size(); i++) {
@@ -41,7 +57,6 @@ public class Structures {
                 conditionalFragment.add(clonedLine.get(i));
             }
         }
-        System.out.println("THE CONDIIITOONAL FRAGMENTTTTTTTTTT");
         System.out.println(conditionalFragment);
         boolean booleanResult = conditionalResult(conditionalFragment);
         System.out.println(line);
@@ -51,6 +66,7 @@ public class Structures {
             for(int i = endOfConditional; i < clonedLine.size(); i++) {
                 int openParentheses = 0;
                 int closedParentheses = 0;
+                System.out.println(clonedLine.get(i));
                 if (clonedLine.get(i).equals("(")) {
                     openParentheses ++;
                     result.add(clonedLine.get(i));
@@ -69,28 +85,47 @@ public class Structures {
             }
         } else {
             int openingParenthesis = 0;
+            int closingParenthesis = 0;
+            int openingIndex = 0;
             clonedLine.remove(clonedLine.size() - 1);
             for(int i = clonedLine.size() - 1; i > 0; i--) {
+
+                if(clonedLine.get(i).equals(")")) {
+                    closingParenthesis ++;
+                }
                 if(clonedLine.get(i).equals("(")) {
-                    openingParenthesis = i;
-                    break;
+                    openingParenthesis++;
+                    if(openingParenthesis == closingParenthesis) {
+                        openingIndex = i;
+                        break;
+                    }
+
                 }
             }
-            for(int i = openingParenthesis + 1; i < clonedLine.size() - 1; i++) {
+            for(int i = openingIndex + 1; i < clonedLine.size() - 1; i++) {
                 result.add(clonedLine.get(i));
             }
 
         }
-
         return result;
     }
 
+    /**
+     * Analyzes the truth value of the conditional fragment of cond
+     * @param conditionalFragment part of cond that contains the comparison to be deemed true or false
+     * @return boolean with the result
+     */
     private boolean conditionalResult(ArrayList<String> conditionalFragment) {
         Logic logicCalculations = new Logic();
         boolean logicalResult = logicCalculations.calculateLogic(conditionalFragment);
         return logicalResult;
     }
 
+    /**
+     * In charge of cond operation
+     * @param line line to be quoted
+     * @return quoted elements
+     */
     private String quoteResult(ArrayList<String> line) {
         //(quote (+ 1 2))
         String result = "";
@@ -104,7 +139,11 @@ public class Structures {
         return result;
     }
 
-
+    /**
+     * Accesses a list element that is saved on a variable
+     * @param line line with the list
+     * @return String with the element
+     */
     private String accessListElement(ArrayList<String> line) {
         String element = "";
         String variableName = line.get(2);
@@ -150,6 +189,11 @@ public class Structures {
         return element;
     }
 
+    /**
+     * In charge of defining lists
+     * @param line line to be made into a list
+     * @return ArrayList containing the list
+     */
     public ArrayList<String> list(ArrayList<String> line) {
         System.out.println("IN LIST");
         ArrayList<String> listResult = new ArrayList<>();

@@ -1,7 +1,19 @@
 import java.util.ArrayList;
-
+/**
+ * <h1>Logic</h1>
+ * Class that operates >, <, and equal
+ * <p>
+ *
+ * @author Joonho Kim (jkmolina) Alejandro Alvarez (Alejandroav93) Pablo Ruiz (PingMaster99)
+ * @version 1.0
+ * @since 2020-03-20
+ **/
 public class Logic {
-
+    /**
+     * Calculates the logic value of a lisp expression
+     * @param line line to be calculated
+     * @return boolean with truth value
+     */
     public boolean calculateLogic(ArrayList<String> line) {
         boolean result = false;
         String typeOfOperation = line.get(1);
@@ -51,15 +63,10 @@ public class Logic {
                         return false;
                     }
                 } else if (LispMemory.variableMemory.containsKey((line.get(2)))) {
-                    System.out.println("IN HEREEEEEEEEEEEEEEEEEEEEEEEEEE");
-                    System.out.println(line.get(2));
                     String comparison = "\"" + LispMemory.variableMemory.get(line.get(2)).get(1) +"\""; // Extend this idea to the others
-                    System.out.println(line.get(3));
                     if(LispMemory.variableMemory.get(line.get(2)).get(1).equals(line.get(3)) || comparison.equals(line.get(3))) {
-                        System.out.println("IT IS TRUEEEEEEEEE YEAH");
                         return true;
                     } else {
-                        System.out.println("FALSE");
                         return false;
                     }
                 } else if  (LispMemory.variableMemory.containsKey((line.get(3)))) {

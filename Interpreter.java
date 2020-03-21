@@ -1,6 +1,14 @@
 import java.util.ArrayList;
-
-public class Interpreter {
+/**
+ * <h1>Interpreter</h1>
+ * Class that interprets Lisp language
+ * <p>
+ *
+ * @author Joonho Kim (jkmolina) Alejandro Alvarez (Alejandroav93) Pablo Ruiz (PingMaster99)
+ * @version 1.0
+ * @since 2020-03-20
+ **/
+public class Interpreter implements InterpreterInterface{
     int i = 0;
     public ArrayList<String> calculate(ArrayList<ArrayList<String>> stack) {
         ArrayList<String> results = new ArrayList<>();
@@ -14,16 +22,12 @@ public class Interpreter {
                 Arithmetic arithmetic = new Arithmetic();
                 double result = arithmetic.calculateArithmetic(lineToCalculate);
                 results.add(result + "");
-                System.out.println("RESULT =" + result);
                 System.out.println(lineToCalculate);
-                System.out.println("ITS ARITHMETIC BOYS");
 
             // Logic calculations
             } else if (isLogic(lineToCalculate)) {
                 Logic logicOperations = new Logic();
                 boolean result = logicOperations.calculateLogic(lineToCalculate);
-                System.out.println("ITS LOGICAL BROOOOO");
-                System.out.println("The result of this calculation is " + result);
                 results.add(result + "");
 
             // Structural definitions
@@ -31,7 +35,6 @@ public class Interpreter {
                 Structures structuralDefinitions = new Structures();
                 String structureResult = structuralDefinitions.operateStructure(lineToCalculate);
                 results.add(structureResult);
-                System.out.println("ITS A TRUCTUUUUREEE YEAHH BOII");
 
             // Setq and defun calculations
             } else if (lineToCalculate.get(1).equals("setq") || lineToCalculate.get(1).equals("defun")) {
@@ -43,9 +46,6 @@ public class Interpreter {
                     result = memorySet.defun(lineToCalculate);
                 }
                 results.add(result);
-                System.out.println("The result is " + result);
-                System.out.println(LispMemory.variableMemory);
-                System.out.println("ITS A SETQ GUYSSSS");
 
             // Defun calculations
             }
@@ -57,11 +57,9 @@ public class Interpreter {
                 String result = LispMemory.runFunction(lineToCalculate) + "";
                 results.add(result);
             }
-
-            for(int j = 0; j < lineToCalculate.size(); j++) {
-                String currentWord =  lineToCalculate.get(j);
-            }
         }
+
+        System.out.println("The results of the program are:");
         System.out.println(results);
         return results;
     }

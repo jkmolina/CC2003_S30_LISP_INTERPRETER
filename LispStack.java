@@ -1,12 +1,22 @@
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.ArrayList;
-
+/**
+ * <h1>LispStack</h1>
+ * Class that generates the stack to be used
+ * <p>
+ *
+ * @author Joonho Kim (jkmolina) Alejandro Alvarez (Alejandroav93) Pablo Ruiz (PingMaster99)
+ * @version 1.0
+ * @since 2020-03-20
+ **/
 public class LispStack implements  StackInterface{
 
-
-    ArrayList<String> stack = new ArrayList<>();
-
+    /**
+     * Gets a stack that can be read by lisp interpreter from a lisp file
+     * @param line line to be
+     * @return
+     */
     public ArrayList<ArrayList<String>> getStack(String document) {
         ArrayList<ArrayList<String>> stack = new ArrayList<>();
 
@@ -121,25 +131,6 @@ public class LispStack implements  StackInterface{
             System.err.println("There was an error while converting the file to a stack");
         }
 
-        System.out.println("MY STACK IS");
-        System.out.println(stack);
         return stack;
     }
-
-    public String pop() {
-        return stack.remove(0);
-    }
-
-    public int size() {
-        return stack.size();
-    }
-
-    public String peek(int index) {
-        return stack.get(index);
-    }
-
-    public void add(String element) {
-        stack.add(element);
-    }
-
 }

@@ -1,7 +1,20 @@
 import java.util.ArrayList;
-
+/**
+ * <h1>Arithmetic</h1>
+ * Class in charge of the arithmetic operations of the interpreter
+ * <p>
+ *
+ * @author Joonho Kim (jkmolina) Alejandro Alvarez (Alejandroav93) Pablo Ruiz (PingMaster99)
+ * @version 1.0
+ * @since 2020-03-20
+ **/
 public class Arithmetic {
 
+    /**
+     * Calculates the arithmetic value of a lisp expression
+     * @param line line to be calculated
+     * @return double with the calculated value
+     */
     public double calculateArithmetic(ArrayList<String> line) {
         LispMemory variables = new LispMemory();
         double result = 1;
@@ -28,8 +41,6 @@ public class Arithmetic {
                 }
             }
             calculateParenthesis(openParentheses,closedParentheses,line);
-            System.out.println("LINE AFTER CALC IS");
-            System.out.println(line);
             index++;
         }
 
@@ -37,10 +48,14 @@ public class Arithmetic {
         return result;
     }
 
+    /**
+     * Calculates sub-parentheses inside an arithmetic expression
+     * @param line line to be
+     * @return
+     */
     public void calculateParenthesis(int open, int closed, ArrayList<String> line) {
         double result = 0;
         String operator = line.get(open + 1);
-        System.out.println("MY OPERATOR IS " + operator);
         switch (operator) {
             case "+":
 
@@ -104,7 +119,6 @@ public class Arithmetic {
                 System.err.println("An error occurred during the calculation");
             }
         }
-
         line.set(open, String.valueOf(result));
     }
 }

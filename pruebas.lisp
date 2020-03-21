@@ -1,3 +1,7 @@
+;Documento para pruebas utilizado
+;El interprete ignora los comentarios
+
+
 ;Expresiones algebraicas
 
 (+ 5 10)
@@ -72,3 +76,6 @@
 
 (fact 5)
 ;120
+
+(fact 6)
+;720
